@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#4a0f22">
+  <title>Arjun &amp; Meera – Wedding Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@400;500&family=Pinyon+Script&family=Noto+Serif+Malayalam:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="locked">
+  <button class="theme" id="theme" type="button" aria-label="Change gold color"></button>
+  <button class="lang" id="lang" type="button">മലയാളം</button>
+
+  <!-- 1. ENVELOPE (first screen) -->
+  <div class="intro" id="intro">
+    <div class="sparkles" id="sparkles"></div>
+    <p class="dear" id="dear" hidden></p>
+    <p class="small">A special invitation from</p>
+    <h1 class="names">Arjun <span>&amp;</span> Meera</h1>
+
+    <button class="envelope" id="envelope" type="button" aria-label="Open the invitation">
+      <span class="env-card">
+        <svg class="card-art" viewBox="0 0 300 203" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <g id="cardCorner">
+              <path class="ln" pathLength="1" d="M13 46 C13 27 27 13 46 13"/>
+              <path class="ln" pathLength="1" d="M13 34 C13 22 22 13 34 13"/>
+              <circle cx="24" cy="24" r="3"/>
+              <ellipse cx="40" cy="22" rx="7" ry="2.5" transform="rotate(-20 40 22)"/>
+              <ellipse cx="22" cy="40" rx="7" ry="2.5" transform="rotate(70 22 40)"/>
+              <circle class="fillp" cx="52" cy="17" r="1.3"/><circle class="fillp" cx="17" cy="52" r="1.3"/>
+            </g>
+          </defs>
+          <g opacity=".14"><ellipse cx="150" cy="76" rx="9" ry="26" transform="rotate(0 150 101.5)"/><ellipse cx="150" cy="76" rx="9" ry="26" transform="rotate(45 150 101.5)"/><ellipse cx="150" cy="76" rx="9" ry="26" transform="rotate(90 150 101.5)"/><ellipse cx="150" cy="76" rx="9" ry="26" transform="rotate(135 150 101.5)"/><ellipse cx="150" cy="76" rx="9" ry="26" transform="rotate(180 150 101.5)"/><ellipse cx="150" cy="76" rx="9" ry="26" transform="rotate(225 150 101.5)"/><ellipse cx="150" cy="76" rx="9" ry="26" transform="rotate(270 150 101.5)"/><ellipse cx="150" cy="76" rx="9" ry="26" transform="rotate(315 150 101.5)"/><circle cx="150" cy="101.5" r="52"/></g>
+          <rect class="ln" pathLength="1" x="8" y="8" width="284" height="187"/>
+          <rect x="11" y="11" width="278" height="181" opacity=".4"/>
+          <use href="#cardCorner"/>
+          <use href="#cardCorner" transform="translate(300 0) scale(-1 1)"/>
+          <use href="#cardCorner" transform="translate(0 203) scale(1 -1)"/>
+          <use href="#cardCorner" transform="translate(300 203) scale(-1 -1)"/>
+          <path class="ln" pathLength="1" d="M128 40 L150 30 L172 40"/>
+          <circle class="fillp" cx="150" cy="24" r="2.2"/>
+          <path d="M96 34 H124 M176 34 H204"/>
+          <path d="M120 176 H140 M160 176 H180"/>
+          <path class="fillp" d="M150 171 L155 176 L150 181 L145 176 Z"/>
+        </svg>
+        <b>A | M</b><i>14 . 02 . 2027</i></span>
+      <span class="pocket"></span>
+      <svg class="env-art" id="envArt" viewBox="0 0 360 238" aria-hidden="true"></svg>
+      <span class="flap">
+        <svg class="flap-art" viewBox="0 0 360 138" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M22 0 L180 114 L338 0"/><path d="M52 0 L180 92 L308 0"/>
+          <circle cx="180" cy="114" r="2.5"/><circle cx="22" cy="0" r="2.5"/><circle cx="338" cy="0" r="2.5"/>
+        </svg>
+      </span>
+      <span class="seal">A&amp;M</span>
+    </button>
+
+    <p class="tap" id="tap">Tap to open</p>
+  </div>
+
+  <!-- 2. SCROLLING INVITATION -->
+  <main class="page">
+
+    <section class="block hero reveal">
+      <p class="monogram">A <span>|</span> M</p>
+      <div class="hero-row">
+        
+        <div class="photo" role="img" aria-label="Photo of the couple"></div>
+        
+      </div>
+      <h2 class="script">We are getting married</h2>
+      <p class="date">Sunday, 14 February 2027</p>
+      <p class="welcome">Your presence will make our day complete.</p>
+    </section>
+
+    <section class="block reveal" aria-label="Countdown">
+      <h2 class="title">Counting down to our day</h2>
+      <div class="count" id="count">
+        <div><b id="d">00</b><span>Days</span></div>
+        <div><b id="h">00</b><span>Hours</span></div>
+        <div><b id="m">00</b><span>Minutes</span></div>
+        <div><b id="s">00</b><span>Seconds</span></div>
+      </div>
+    </section>
+
+    <section class="block reveal" aria-label="3D rings">
+      <h2 class="title">Two rings, one promise</h2>
+      <div class="rings" id="rings"></div>
+      <p class="small">Drag to turn the rings</p>
+    </section>
+
+    <section class="block reveal" aria-label="Families">
+      <h2 class="title">With the blessings of</h2>
+      <div class="tabs">
+        <button class="tab on" data-side="bride" type="button">Bride's family</button>
+        <button class="tab" data-side="groom" type="button">Groom's family</button>
+      </div>
+      <p class="family" id="familyText">The bride's family joyfully invites you to celebrate the wedding of their daughter Meera.</p>
+    </section>
+
+    <section class="block reveal" aria-label="Music">
+      <button class="vinyl" id="vinyl" type="button" aria-label="Play or pause music">
+        <span class="label">♪</span>
+      </button>
+      <p class="small" id="vinylText">Tap the record to play our song</p>
+      <audio id="song" src="song.mp3" loop preload="none"></audio>
+    </section>
+
+    <section class="block reveal" aria-label="Our story">
+      <h2 class="title">Our story</h2>
+      <ol class="story">
+        <li><b>How we met</b><p>Write two or three lines here about your first meeting.</p></li>
+        <li><b>The proposal</b><p>Write two or three lines here about the day you said yes.</p></li>
+        <li><b>Forever begins</b><p>Write two or three lines here about what this wedding means to you.</p></li>
+      </ol>
+    </section>
+
+    <section class="block reveal" aria-label="Schedule">
+      <h2 class="title">Schedule</h2>
+      <ul class="schedule">
+        <li><b>Mehendi and Haldi</b><span>Saturday, 13 February · 4:00 pm</span><span>Bride's home</span></li>
+        <li><b>Wedding ceremony</b><span>Sunday, 14 February · 10:30 am</span><span>Rose Garden Convention Hall</span></li>
+        <li><b>Reception</b><span>Sunday, 14 February · 6:30 pm</span><span>Rose Garden Convention Hall</span></li>
+      </ul>
+    </section>
+
+    <section class="block reveal" aria-label="Photos">
+      <h2 class="title">Photos</h2>
+      <div class="gallery">
+        <div style="--img:url(photo1.jpg)"></div>
+        <div style="--img:url(photo2.jpg)"></div>
+        <div style="--img:url(photo3.jpg)"></div>
+        <div style="--img:url(photo4.jpg)"></div>
+      </div>
+    </section>
+
+    <section class="block reveal" aria-label="Details">
+      <h2 class="title">Join us</h2>
+      <dl>
+        <dt>When</dt>
+        <dd>Sunday, 14 February 2027<br>10:30 in the morning</dd>
+        <dt>Where</dt>
+        <dd>Rose Garden Convention Hall<br>Main Road, Your City</dd>
+        <dt>Lunch</dt>
+        <dd>Served after the ceremony</dd>
+      </dl>
+      <div class="actions">
+        <a class="btn" href="https://maps.google.com/?q=Rose+Garden+Convention+Hall" target="_blank" rel="noopener">Get directions</a>
+        <button class="btn ghost" id="saveDate" type="button">Save the date</button>
+      </div>
+    </section>
+
+    <section class="block reveal" aria-label="RSVP">
+      <h2 class="title">Will you join us?</h2>
+      <div class="actions">
+        <a class="btn" id="rsvpYes" href="#" target="_blank" rel="noopener">Yes, we will come</a>
+        <a class="btn ghost" id="rsvpNo" href="#" target="_blank" rel="noopener">Sorry, we can't come</a>
+      </div>
+    </section>
+
+    <section class="block reveal" aria-label="Blessings">
+      <h2 class="title">Blessings for us</h2>
+      <a class="btn" id="wishes" href="https://forms.gle/your-form-link" target="_blank" rel="noopener">Send your blessings</a>
+    </section>
+
+    <footer class="block reveal">
+      <p class="script">With love, Arjun &amp; Meera</p>
+    </footer>
+  </main>
+
+  <div class="walkers" id="walkers" aria-hidden="true">
+    <div class="walker w-groom"><svg class="fig groom" viewBox="0 0 100 200" aria-hidden="true">
+          <defs>
+            <linearGradient id="g-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe6d6"/><stop offset="1" stop-color="#f1b99d"/></linearGradient>
+            <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--gold-hi)"/><stop offset=".55" style="stop-color:var(--gold)"/><stop offset="1" stop-color="#7d5a1e"/></linearGradient>
+            <linearGradient id="g-hair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b2f4f"/><stop offset="1" stop-color="#0f0814"/></linearGradient>
+            <linearGradient id="g-wine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a42a50"/><stop offset="1" stop-color="#521027"/></linearGradient>
+            <linearGradient id="g-pants" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fbf3e4"/><stop offset="1" stop-color="#d8c7a6"/></linearGradient>
+            <radialGradient id="g-iris" cx=".5" cy=".3" r=".8"><stop offset="0" stop-color="#7a5ad6"/><stop offset="1" stop-color="#2a1a5c"/></radialGradient>
+          </defs>
+          <ellipse cx="50" cy="194" rx="26" ry="3.5" fill="rgba(0,0,0,.35)"/>
+          <path d="M41 110 L38 184 L48 184 L51 118 Z" fill="url(#g-pants)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+          <path d="M59 110 L62 184 L52 184 L49 118 Z" fill="url(#g-pants)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+          <path d="M35 184 L48 184 Q50 188 50 191 L33 191 Q33 186 35 184 Z" fill="#2a1410"/>
+          <path d="M65 184 L52 184 Q50 188 50 191 L67 191 Q67 186 65 184 Z" fill="#2a1410"/>
+          <path d="M45 36 L45 49 Q50 53 55 49 L55 36 Z" fill="#efb698"/>
+          <path d="M31 51 Q50 44 69 51 L73 100 L77 152 Q50 160 23 152 L27 100 Z" fill="url(#g-gold)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+          <path d="M23.5 147 Q50 155 76.5 147" fill="none" stroke="#fff3c4" stroke-width="1.2" stroke-dasharray="2 1.6"/>
+          <path d="M50 58 L50 155" stroke="#7d5a1e" stroke-width=".8"/>
+          <circle cx="50" cy="70" r="1.3" fill="#fff3c4"/><circle cx="50" cy="86" r="1.3" fill="#fff3c4"/><circle cx="50" cy="102" r="1.3" fill="#fff3c4"/><circle cx="50" cy="118" r="1.3" fill="#fff3c4"/><circle cx="50" cy="134" r="1.3" fill="#fff3c4"/>
+          <path d="M42 45 L50 54 L58 45 L60 50 L50 61 L40 50 Z" fill="#8a6422"/>
+          <path d="M30 60 L26 124 L36 126 L40 76 Z" fill="url(#g-wine)" style="stroke:var(--gold)" stroke-width=".6"/>
+          <path d="M32 52 Q50 80 68 52 L72 58 Q50 96 28 58 Z" fill="url(#g-wine)" style="stroke:var(--gold)" stroke-width=".6"/>
+          <path d="M31 53 Q20 80 25 110 L33 110 Q32 84 38 62 Z" fill="url(#g-gold)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+          <rect x="24" y="107" width="9" height="4" fill="#fff3c4"/>
+          <path d="M25 111 Q24 121 28.5 123 Q33 121 33 111 Z" fill="url(#g-skin)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+          <g class="wave">
+            <path d="M69 53 Q80 78 78 104 L70 104 Q71 82 62 62 Z" fill="url(#g-gold)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+            <rect x="69.5" y="101" width="9" height="4" fill="#fff3c4"/>
+            <path d="M70 105 Q70 115 74.5 117 Q79 115 78.5 105 Z" fill="url(#g-skin)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+          </g>
+          <path d="M34 22 Q33 6 50 5 Q67 6 66 22 L66 28 L34 28 Z" fill="url(#g-hair)"/>
+          <ellipse cx="35.5" cy="27" rx="2" ry="3.2" fill="#f4bfa3"/><ellipse cx="64.5" cy="27" rx="2" ry="3.2" fill="#f4bfa3"/>
+          <path d="M35.5 20 Q35 38 50 45 Q65 38 64.5 20 Q64 9 50 9 Q36 9 35.5 20 Z" fill="url(#g-skin)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+          <path d="M34 25 Q31 3 50 3 Q69 3 66 25 Q65 15 60 12 Q58 19 52 12 Q49 20 44 12 Q40 17 38 13 Q35 17 34 25 Z" fill="url(#g-hair)"/>
+          <path d="M34 25 Q32 36 36 42 L38 30 Z" fill="url(#g-hair)"/><path d="M66 25 Q68 36 64 42 L62 30 Z" fill="url(#g-hair)"/>
+          <path d="M42 7 Q50 4 58 7" stroke="#9a8cc4" stroke-width="1.1" fill="none" opacity=".75" stroke-linecap="round"/>
+          <path d="M38.5 11 Q42 8.5 46 9.5" stroke="#9a8cc4" stroke-width="1" fill="none" opacity=".6" stroke-linecap="round"/>
+          <path d="M38.5 21 Q43 18.2 47.5 19.8 M52.5 19.8 Q57 18.2 61.5 21" stroke="#1a0f1e" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+          <g class="eye"><ellipse cx="43" cy="28" rx="4.3" ry="5.3" fill="#fff"/><ellipse cx="43" cy="28.7" rx="3.3" ry="4.6" fill="url(#g-iris)"/><ellipse cx="43" cy="28.9" rx="1.6" ry="2.6" fill="#120a1a"/><circle cx="41.7" cy="26.2" r="1.4" fill="#fff"/><circle cx="44.4" cy="30.3" r=".7" fill="#fff" opacity=".85"/><path d="M38.1 27 Q43 21.3 47.9 27" stroke="#120a1a" stroke-width="1.7" fill="none" stroke-linecap="round"/><path d="M38.1 27 L36.7 25.6" stroke="#120a1a" stroke-width="1.3" stroke-linecap="round"/></g>
+          <g class="eye"><ellipse cx="57" cy="28" rx="4.3" ry="5.3" fill="#fff"/><ellipse cx="57" cy="28.7" rx="3.3" ry="4.6" fill="url(#g-iris)"/><ellipse cx="57" cy="28.9" rx="1.6" ry="2.6" fill="#120a1a"/><circle cx="55.7" cy="26.2" r="1.4" fill="#fff"/><circle cx="58.4" cy="30.3" r=".7" fill="#fff" opacity=".85"/><path d="M52.1 27 Q57 21.3 61.9 27" stroke="#120a1a" stroke-width="1.7" fill="none" stroke-linecap="round"/><path d="M61.9 27 L63.3 25.6" stroke="#120a1a" stroke-width="1.3" stroke-linecap="round"/></g>
+          <path d="M50 33 L49.2 35.4 L50.8 35.4" stroke="#c98d78" stroke-width=".6" fill="none"/>
+          <path d="M46.6 38.8 Q50 41.4 53.4 38.8" stroke="#c4585e" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+          <ellipse cx="40" cy="34.5" rx="3.2" ry="1.7" fill="#ff8f9c" opacity=".35"/><ellipse cx="60" cy="34.5" rx="3.2" ry="1.7" fill="#ff8f9c" opacity=".35"/>
+          <path d="M33 53 Q50 104 67 53" fill="none" stroke="#e05a74" stroke-width="3.2" stroke-dasharray="1 4.2" stroke-linecap="round"/>
+          <path class="heart" d="M84 28 c-3-5-10-1-6 4 l6 6 6-6 c4-5-3-9-6-4z"/>
+        </svg></div>
+    <div class="walker w-bride"><svg class="fig bride" viewBox="0 0 100 200" aria-hidden="true">
+          <defs>
+            <linearGradient id="b-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9db"/><stop offset="1" stop-color="#f3bfa4"/></linearGradient>
+            <linearGradient id="b-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--gold-hi)"/><stop offset=".6" style="stop-color:var(--gold)"/><stop offset="1" stop-color="#7d5a1e"/></linearGradient>
+            <linearGradient id="b-hair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2a40"/><stop offset="1" stop-color="#0e0712"/></linearGradient>
+            <linearGradient id="b-dress" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b92f5b"/><stop offset="1" stop-color="#5a0f29"/></linearGradient>
+            <linearGradient id="b-veil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(205,60,105,.75)"/><stop offset="1" stop-color="rgba(120,20,55,.6)"/></linearGradient>
+            <radialGradient id="b-iris" cx=".5" cy=".3" r=".8"><stop offset="0" stop-color="#e3a65a"/><stop offset="1" stop-color="#6a2f14"/></radialGradient>
+          </defs>
+          <ellipse cx="50" cy="194" rx="32" ry="3.5" fill="rgba(0,0,0,.35)"/>
+          <path d="M32 20 Q24 56 29 112 Q40 118 50 112 Q60 118 71 112 Q76 56 68 20 Z" fill="url(#b-hair)"/>
+          <path d="M37 98 Q50 104 63 98 L89 188 Q50 199 11 188 Z" fill="url(#b-dress)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+          <path d="M44 104 L30 190 M50 105 L50 194 M56 104 L70 190" stroke="rgba(0,0,0,.2)" stroke-width=".8" fill="none"/>
+          <path d="M20 160 Q50 170 80 160" stroke="#fff3c4" stroke-width="1.3" stroke-dasharray="2 1.6" fill="none"/>
+          <path d="M11 188 Q50 199 89 188 L87.5 181 Q50 192 12.5 181 Z" fill="url(#b-gold)"/>
+          <path d="M38 78 Q50 84 62 78 L62 99 Q50 104 38 99 Z" fill="url(#b-skin)"/>
+          <path d="M37 98 Q50 104 63 98" fill="none" style="stroke:var(--gold-hi)" stroke-width="1.6"/>
+          <path d="M36 52 Q50 46 64 52 L63 80 Q50 87 37 80 Z" fill="url(#b-dress)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+          <path d="M41 50 Q50 62 59 50" fill="none" style="stroke:var(--gold-hi)" stroke-width="1.6"/>
+          <path d="M64 54 Q77 80 74 108 L67 108 Q69 82 60 62 Z" fill="url(#b-skin)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+          <path d="M67 108 Q67 118 71 120 Q76 118 74 108 Z" fill="url(#b-skin)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+          <rect x="66" y="100" width="9" height="2.2" rx="1" style="fill:var(--gold-hi)"/><rect x="66" y="103.5" width="9" height="2.2" rx="1" style="fill:var(--gold-hi)"/>
+          <g class="wave wl">
+            <path d="M36 54 Q23 78 27 106 L34 106 Q33 82 40 62 Z" fill="url(#b-skin)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+            <path d="M27 106 Q26 116 30 118 Q35 116 34 106 Z" fill="url(#b-skin)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+            <rect x="26" y="98" width="9" height="2.2" rx="1" style="fill:var(--gold-hi)"/><rect x="26" y="101.5" width="9" height="2.2" rx="1" style="fill:var(--gold-hi)"/>
+          </g>
+          <path d="M45.5 38 L45.5 50 Q50 54 54.5 50 L54.5 38 Z" fill="#f0b99c"/>
+          <path d="M41 52 Q50 64 59 52" fill="none" style="stroke:var(--gold-hi)" stroke-width="1.5"/>
+          <circle cx="50" cy="62" r="1.8" fill="#d11f4a"/>
+          <path d="M35.5 21 Q35 38 50 44 Q65 38 64.5 21 Q64 10 50 10 Q36 10 35.5 21 Z" fill="url(#b-skin)" stroke="#3a1a22" stroke-opacity=".55" stroke-width=".5"/>
+          <circle cx="35" cy="31" r="1.4" style="fill:var(--gold-hi)"/><path d="M33.8 32 L36.2 32 L35 37 Z" style="fill:var(--gold-hi)"/>
+          <circle cx="65" cy="31" r="1.4" style="fill:var(--gold-hi)"/><path d="M63.8 32 L66.2 32 L65 37 Z" style="fill:var(--gold-hi)"/>
+          <path d="M34 26 Q31 5 50 4 Q69 5 66 26 Q63 14 52 11 Q50 12 50 12 Q37 14 34 26 Z" fill="url(#b-hair)"/>
+          <path d="M34 26 Q31 40 35 50 L38 34 Z" fill="url(#b-hair)"/><path d="M66 26 Q69 40 65 50 L62 34 Z" fill="url(#b-hair)"/>
+          <path d="M42 8 Q50 5 58 8" stroke="#9b88b8" stroke-width="1.1" fill="none" opacity=".7" stroke-linecap="round"/>
+          <path d="M50 6 L50 15" style="stroke:var(--gold-hi)" stroke-width=".8"/>
+          <circle cx="50" cy="17" r="1.8" style="fill:var(--gold-hi)"/><circle cx="50" cy="17" r=".8" fill="#d11f4a"/>
+          <circle cx="50" cy="23" r="1.1" fill="#c4163a"/>
+          <path d="M38.5 21.5 Q43 19.2 47.5 20.8 M52.5 20.8 Q57 19.2 61.5 21.5" stroke="#2a1420" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <g class="eye"><ellipse cx="43.5" cy="29" rx="4.3" ry="5.3" fill="#fff"/><ellipse cx="43.5" cy="29.7" rx="3.3" ry="4.6" fill="url(#b-iris)"/><ellipse cx="43.5" cy="29.9" rx="1.6" ry="2.6" fill="#120a1a"/><circle cx="42.2" cy="27.2" r="1.4" fill="#fff"/><circle cx="44.9" cy="31.3" r=".7" fill="#fff" opacity=".85"/><path d="M38.6 28 Q43.5 22.3 48.4 28" stroke="#120a1a" stroke-width="1.7" fill="none" stroke-linecap="round"/><path d="M38.6 28 L36.2 26.6" stroke="#120a1a" stroke-width="1.3" stroke-linecap="round"/></g>
+          <g class="eye"><ellipse cx="56.5" cy="29" rx="4.3" ry="5.3" fill="#fff"/><ellipse cx="56.5" cy="29.7" rx="3.3" ry="4.6" fill="url(#b-iris)"/><ellipse cx="56.5" cy="29.9" rx="1.6" ry="2.6" fill="#120a1a"/><circle cx="55.2" cy="27.2" r="1.4" fill="#fff"/><circle cx="57.9" cy="31.3" r=".7" fill="#fff" opacity=".85"/><path d="M51.6 28 Q56.5 22.3 61.4 28" stroke="#120a1a" stroke-width="1.7" fill="none" stroke-linecap="round"/><path d="M61.4 28 L63.8 26.6" stroke="#120a1a" stroke-width="1.3" stroke-linecap="round"/></g>
+          <path d="M50 34 L49.3 36.2 L50.7 36.2" stroke="#c98d78" stroke-width=".6" fill="none"/>
+          <path d="M46.8 39.4 Q50 42.4 53.2 39.4 Q50 40.6 46.8 39.4 Z" fill="#d6455f" stroke="#d6455f" stroke-width=".7" stroke-linejoin="round"/>
+          <ellipse cx="40" cy="35" rx="3.2" ry="1.8" fill="#ff7f93" opacity=".45"/><ellipse cx="60" cy="35" rx="3.2" ry="1.8" fill="#ff7f93" opacity=".45"/>
+          <circle cx="35" cy="11" r="1.8" fill="#ffd1dc"/><circle cx="38.6" cy="9.4" r="1.8" fill="#ffd1dc"/><circle cx="37" cy="13.4" r="1.8" fill="#ffd1dc"/><circle cx="37" cy="11.2" r=".9" style="fill:var(--gold-hi)"/>
+          <path class="veil" d="M31 26 Q30 3 50 2 Q70 3 69 26 Q76 62 72 120 L64 116 Q67 70 62 40 Q56 12 50 12 Q44 12 38 40 Q33 70 36 116 L28 120 Q24 62 31 26 Z" fill="url(#b-veil)"/>
+          <path class="heart d2" d="M16 28 c-3-5-10-1-6 4 l6 6 6-6 c4-5-3-9-6-4z"/>
+        </svg></div>
+    <p class="just">Just Married</p>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js"></script>
+  <script src="rings.js"></script>
+</body>
+</html>

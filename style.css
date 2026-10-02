@@ -1,0 +1,471 @@
+:root {
+  --black: #4a0f22;   /* burgundy background */
+  --deep: #2a0712;    /* darkest burgundy, for text on gold */
+  --panel: #5c1630;
+  --gold: #c9a24b;
+  --gold-rgb: 201, 162, 75;
+  --gold-hi: #f0d78c;
+  --text: #f8ebe3;
+  --ew: min(84vw, 420px, 46dvh); /* envelope width */
+}
+
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: "Jost", system-ui, sans-serif;
+  line-height: 1.5;
+  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+}
+body.locked { overflow: hidden; height: 100vh; height: 100dvh; }
+
+.small { font-size: .8rem; letter-spacing: .04em; color: var(--gold); }
+
+/* Gold text */
+.names, .script, .monogram, .count b {
+  background: linear-gradient(120deg, var(--gold) 0%, var(--gold-hi) 45%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- ENVELOPE INTRO ---------- */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: radial-gradient(circle at 50% 35%, #6e1c38, var(--black) 70%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  gap: clamp(.6rem, 2.5dvh, 1.4rem);
+  padding: 1rem;
+  overflow: hidden;
+  touch-action: none;
+  text-align: center;
+  transition: transform 1.1s cubic-bezier(.7, 0, .2, 1), opacity .8s ease .3s;
+}
+.intro.done { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+
+.names {
+  font-family: "Pinyon Script", cursive;
+  font-weight: 400;
+  font-size: clamp(2.4rem, 12vw, 3.4rem);
+  font-size: clamp(2rem, min(12vw, 8dvh), 3.4rem);
+  line-height: 1.1;
+}
+.names span { font-size: .7em; }
+
+.envelope {
+  position: relative;
+  width: var(--ew);
+  height: calc(var(--ew) * .66);
+  margin-top: 1.5rem;
+  margin-top: clamp(1.5rem, 7dvh, 3rem); /* room for the card to rise */
+  border: 0;
+  background: none;
+  cursor: pointer;
+  perspective: 900px;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform .2s ease-out;
+  -webkit-tap-highlight-color: transparent;
+}
+.envelope > span { position: absolute; }
+
+.env-card {
+  left: 7%; right: 7%; top: 6%; bottom: 6%;
+  z-index: 1;
+  background: linear-gradient(135deg, var(--gold-hi), var(--gold));
+  color: var(--deep);
+  display: grid;
+  place-content: center;
+  gap: .3rem;
+  text-align: center;
+  transition: transform 1s cubic-bezier(.3, .8, .3, 1) .7s;
+}
+.env-card b { font-family: "Cormorant Garamond", serif; font-size: 1.6rem; }
+.env-card i { font-family: "Cormorant Garamond", serif; font-size: 1.1rem; }
+
+.pocket {
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(160deg, #661935, #360a1b);
+  clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(0 0 1px var(--gold));
+}
+
+.flap {
+  left: 0; right: 0; top: 0;
+  height: 58%;
+  z-index: 3;
+  background: linear-gradient(180deg, #742040, #3f0d20);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transition: transform .8s ease, z-index 0s .4s;
+}
+
+.seal {
+  z-index: 4;
+  left: 50%; top: 58%;
+  width: 3.6rem; height: 3.6rem;
+  margin: -1.8rem 0 0 -1.8rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--gold-hi), var(--gold) 70%);
+  color: var(--deep);
+  font: 600 .95rem "Cormorant Garamond", serif;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 .3rem .8rem rgba(0, 0, 0, .6);
+  transition: opacity .4s ease;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 50% { transform: scale(1.08); } }
+
+.tap { font-family: "Cormorant Garamond", serif; font-size: 1.5rem; color: var(--gold); }
+
+/* Opened state */
+.intro.open .flap { transform: rotateX(180deg); z-index: 0; }
+.intro.open .seal { opacity: 0; animation: none; }
+.intro.open .env-card { transform: translateY(-58%); }
+.intro.open .tap { opacity: 0; transition: opacity .4s; }
+
+/* ---------- SCROLLING PAGE ---------- */
+.page { max-width: 480px; margin: 0 auto; padding: 0 1.4rem 3rem; }
+
+.block { padding: 3.2rem 0; text-align: center; }
+.block + .block { border-top: 1px solid rgba(var(--gold-rgb), .25); }
+
+.monogram { font-family: "Cormorant Garamond", serif; font-size: 2.4rem; font-weight: 600; }
+.monogram span { font-weight: 400; }
+
+.photo {
+  width: min(78vw, 300px);
+  aspect-ratio: 3 / 4;
+  margin: 1.6rem auto;
+  border: 1px solid var(--gold);
+  outline: 1px solid rgba(var(--gold-rgb), .4);
+  outline-offset: .5rem;
+  /* Put your photo in this folder as couple.jpg. Until then the gradient shows. */
+  background:
+    url("couple.jpg") center / cover no-repeat,
+    linear-gradient(160deg, #631a35, #2a0712);
+}
+
+.script { font-family: "Pinyon Script", cursive; font-size: clamp(1.9rem, 9vw, 2.6rem); font-weight: 400; line-height: 1.2; }
+.date { font-family: "Cormorant Garamond", serif; font-size: 1.4rem; margin-top: .6rem; }
+
+.title { font-family: "Cormorant Garamond", serif; font-size: 1.9rem; font-weight: 600; margin-bottom: 1.4rem; color: var(--gold-hi); }
+
+/* Countdown */
+.count { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; }
+.count div { border: 1px solid rgba(var(--gold-rgb), .5); padding: .9rem .2rem; background: var(--panel); }
+.count b { display: block; font: 600 clamp(1.5rem, 8vw, 2.2rem) "Cormorant Garamond", serif; font-variant-numeric: tabular-nums; }
+.count span { font-size: clamp(.6rem, 2.8vw, .72rem); color: var(--text); opacity: .8; }
+
+/* Vinyl */
+.vinyl {
+  width: 9rem; height: 9rem;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  border: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  background: repeating-radial-gradient(circle, #1e060d 0 2px, #2e0c18 2px 4px);
+  box-shadow: 0 0 0 2px var(--gold), 0 1rem 2rem rgba(0, 0, 0, .6);
+}
+.vinyl .label {
+  width: 3.4rem; height: 3.4rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--gold-hi), var(--gold));
+  color: var(--deep);
+  font-size: 1.4rem;
+  display: grid;
+  place-items: center;
+}
+.vinyl.playing { animation: spin 4s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Details */
+dl { margin-bottom: 1.8rem; }
+dt { font-size: .8rem; color: var(--gold); margin-top: 1.1rem; }
+dd { font-size: 1.05rem; }
+
+.actions { display: grid; gap: .8rem; justify-items: center; }
+.btn {
+  display: inline-block;
+  min-width: 14rem;
+  padding: .85rem 1.6rem;
+  border-radius: 2rem;
+  background: linear-gradient(120deg, var(--gold), var(--gold-hi));
+  color: var(--deep);
+  font-weight: 500;
+  text-decoration: none;
+}
+.btn.ghost { background: none; color: var(--gold-hi); border: 1px solid var(--gold); }
+.btn:focus-visible, .vinyl:focus-visible, .envelope:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 4px; }
+
+/* Reveal on scroll */
+.reveal { opacity: 0; transform: perspective(900px) rotateX(16deg) translateY(1.5rem); transform-origin: 50% 100%; transition: opacity 1s ease, transform 1s cubic-bezier(.2, .8, .3, 1); }
+.reveal.show { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .01s !important; animation: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+
+/* ---------- New sections and extras ---------- */
+body.ml, body.ml * { font-family: "Noto Serif Malayalam", serif !important; }
+
+.lang {
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + .8rem);
+  right: .8rem;
+  z-index: 20;
+  padding: .45rem .9rem;
+  min-height: 40px;
+  border-radius: 2rem;
+  border: 1px solid var(--gold);
+  background: rgba(42, 7, 18, .88);
+  color: var(--gold-hi);
+  font: 500 .85rem "Jost", sans-serif;
+  cursor: pointer;
+}
+.lang:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 3px; }
+
+.dear { font-family: "Cormorant Garamond", serif; font-size: 1.5rem; color: var(--gold-hi); }
+.dear[hidden] { display: none; }
+
+.sparkles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.sparkles span {
+  position: absolute;
+  bottom: -3%;
+  width: var(--s); height: var(--s);
+  border-radius: 50%;
+  background: var(--gold-hi);
+  box-shadow: 0 0 6px var(--gold);
+  opacity: 0;
+  animation: rise var(--t) linear infinite var(--dl);
+}
+@keyframes rise {
+  10% { opacity: .9; }
+  100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* Story: vertical gold line */
+.story { list-style: none; padding: 0 0 0 1.4rem; text-align: left; border-left: 1px solid var(--gold); }
+.story li { position: relative; padding-bottom: 1.6rem; }
+.story li:last-child { padding-bottom: 0; }
+.story li::before {
+  content: "";
+  position: absolute;
+  left: calc(-1.4rem - 4px); top: .45rem;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--gold-hi);
+}
+.story b { font: 600 1.25rem "Cormorant Garamond", serif; color: var(--gold-hi); }
+.story p { font-size: .95rem; opacity: .85; }
+
+/* Schedule */
+.schedule { list-style: none; padding: 0; display: grid; gap: .8rem; }
+.schedule li {
+  display: grid;
+  gap: .15rem;
+  padding: 1rem;
+  border: 1px solid rgba(var(--gold-rgb), .5);
+  background: var(--panel);
+}
+.schedule b { font: 600 1.3rem "Cormorant Garamond", serif; color: var(--gold-hi); }
+.schedule span { font-size: .92rem; }
+
+/* Gallery: swipe sideways */
+.gallery {
+  display: flex;
+  gap: .9rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: .6rem;
+  -webkit-overflow-scrolling: touch;
+}
+.gallery div {
+  flex: 0 0 72%;
+  aspect-ratio: 3 / 4;
+  scroll-snap-align: center;
+  border: 1px solid var(--gold);
+  outline: 1px solid rgba(var(--gold-rgb), .4);
+  outline-offset: -.5rem;
+  background: var(--img, none) center / cover no-repeat, linear-gradient(160deg, #631a35, #2a0712);
+}
+
+
+/* ---------- Rose gold option ---------- */
+body.rose { --gold: #e0a596; --gold-hi: #f8d9cd; --gold-rgb: 224, 165, 150; }
+
+.theme {
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + .8rem);
+  left: .8rem;
+  z-index: 20;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-hi);
+  background: linear-gradient(135deg, var(--gold-hi), var(--gold));
+  cursor: pointer;
+}
+.theme:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 3px; }
+
+/* ---------- 3D rings ---------- */
+.rings {
+  width: min(78vw, 320px);
+  aspect-ratio: 1;
+  margin: 0 auto .6rem;
+  touch-action: pan-y;   /* up/down still scrolls the page */
+  cursor: grab;
+}
+.rings canvas { display: block; width: 100%; height: 100%; }
+
+/* ---------- Welcome line, family tabs ---------- */
+.welcome { font: italic 1.15rem "Cormorant Garamond", serif; margin-top: 1rem; opacity: .9; }
+
+.tabs { display: flex; justify-content: center; gap: .6rem; margin-bottom: 1.2rem; }
+.tab {
+  min-height: 44px;
+  padding: .55rem 1.1rem;
+  border-radius: 2rem;
+  border: 1px solid var(--gold);
+  background: none;
+  color: var(--gold-hi);
+  font: 500 .9rem "Jost", sans-serif;
+  cursor: pointer;
+}
+.tab.on { background: linear-gradient(120deg, var(--gold), var(--gold-hi)); color: var(--deep); }
+.tab:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 3px; }
+.family { font: 1.25rem/1.5 "Cormorant Garamond", serif; }
+
+
+/* ---------- Fit every phone ---------- */
+html, body { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+img, svg, canvas { max-width: 100%; }
+
+/* ---------- Envelope art ---------- */
+.env-art { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+.env-art * { fill: none; stroke: var(--gold); stroke-width: 1; }
+.env-art path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: drawIn 2.4s ease forwards .4s; }
+.env-art ellipse, .env-art circle { opacity: 0; animation: fadeIn .8s ease forwards 1.6s; }
+.env-art ellipse { fill: rgba(var(--gold-rgb), .28); }
+.flap-art { position: absolute; inset: 0; width: 100%; height: 100%; }
+.flap-art * { fill: none; stroke: var(--gold); stroke-width: .9; opacity: .7; }
+.flap-art circle { fill: var(--gold); stroke: none; }
+@keyframes drawIn { to { stroke-dashoffset: 0; } }
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* Gold shimmer on names */
+.names, .script, .monogram { background-size: 200% auto; animation: shimmer 6s linear infinite; }
+@keyframes shimmer { to { background-position: 200% center; } }
+
+/* Burst of gold when the envelope opens */
+.burst { position: absolute; z-index: 5; width: 6px; height: 6px; border-radius: 50%; opacity: 0; pointer-events: none;
+  background: var(--gold-hi); box-shadow: 0 0 8px var(--gold); }
+
+/* 3D flip when countdown numbers change, 3D tilt on cards */
+.count div { perspective: 500px; }
+.count b { animation: flip .5s ease; }
+.count b.flip { animation: flip .5s ease; }
+@keyframes flip { from { transform: rotateX(90deg); opacity: .2; } to { transform: none; opacity: 1; } }
+.photo, .schedule li, .count div { transition: transform .2s ease-out; }
+
+
+/* ---------- Art on the gold card ---------- */
+.card-art { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.card-art * { fill: none; stroke: var(--deep); stroke-width: .9; }
+.card-art .fillp { fill: var(--deep); stroke: none; }
+.card-art .ln { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.intro.open .card-art .ln { animation: drawIn 2s ease forwards 1s; }
+.env-card b, .env-card i { position: relative; z-index: 1; }
+
+/* Reduced motion: show all the line art fully drawn */
+@media (prefers-reduced-motion: reduce) {
+  .card-art .ln, .env-art path { stroke-dashoffset: 0; }
+  .env-art ellipse, .env-art circle { opacity: 1; }
+}
+
+
+/* ---------- Groom (left) and bride (right) animated figures ---------- */
+.hero-row { display: flex; align-items: flex-end; justify-content: center; gap: .5rem; margin: 1.6rem 0; }
+.hero-row .photo { width: auto; flex: 1 1 0; max-width: 260px; margin: 0; }
+
+.fig { flex: 0 0 clamp(56px, 19vw, 100px); height: auto; overflow: visible; transform-origin: 50% 100%; animation: sway 4s ease-in-out infinite; }
+.bride { animation-delay: -2s; }
+@keyframes sway { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+
+.fig .g { fill: var(--gold); }
+.fig .gh { fill: var(--gold-hi); }
+.fig .gh-s { stroke: var(--gold-hi); }
+.fig .skin { fill: #e7b48d; }
+.fig .hair { fill: #1c0f0d; }
+.fig .ivory { fill: #f3e6d0; }
+.fig .shoe { fill: #1c0f0d; }
+.fig .stole { fill: #7a1f3e; }
+.fig .dress { fill: #8c1d3f; }
+.fig .veil { stroke: var(--gold); stroke-width: .8; }
+
+.wave { transform-box: fill-box; transform-origin: 0 0; animation: wave 1.8s ease-in-out infinite; }
+.wave.wl { transform-origin: 100% 0; animation-delay: -.9s; }
+@keyframes wave { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(18deg); } }
+.wl { animation-name: waveL; }
+@keyframes waveL { 0%, 100% { transform: rotate(8deg); } 50% { transform: rotate(-18deg); } }
+
+.eye { transform-box: fill-box; transform-origin: center; animation: blink 5s infinite; }
+@keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+
+.veil { transform-box: fill-box; transform-origin: 50% 0; animation: flutter 3s ease-in-out infinite; }
+@keyframes flutter { 0%, 100% { transform: skewX(-2deg); } 50% { transform: skewX(3deg); } }
+
+.heart { fill: #e05a74; opacity: 0; transform-box: fill-box; animation: floatUp 3.5s ease-in infinite; }
+.heart.d2 { animation-delay: -1.7s; }
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(8px) scale(.6); }
+  25% { opacity: .9; }
+  100% { opacity: 0; transform: translateY(-26px) scale(1.1); }
+}
+
+
+/* ---------- Boy and girl walk toward each other while you scroll, then get married ---------- */
+:root { --fw: clamp(54px, 17vw, 100px); }
+.hero-row .photo { width: min(78vw, 300px); flex: none; }
+
+.walkers { position: fixed; left: 0; right: 0; bottom: env(safe-area-inset-bottom, 0px); height: 0; z-index: 6; pointer-events: none; transition: opacity .6s; }
+body.locked .walkers { opacity: 0; }
+.walker { position: absolute; bottom: 0; width: var(--fw); will-change: transform; }
+.w-groom { left: 6px; }
+.w-bride { right: 6px; }
+.walker .fig { width: 100%; height: auto; display: block; transition: transform .6s ease; }
+
+.walkers.walking .fig { animation: walk .45s ease-in-out infinite; }
+@keyframes walk { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-5px) rotate(3deg); } }
+
+.walkers.married .fig { animation: none; }
+.walkers.married .groom { transform: rotate(5deg); }
+.walkers.married .bride { transform: rotate(-5deg); }
+
+.just {
+  position: absolute; left: 50%; bottom: calc(var(--fw) * 2 + .5rem);
+  transform: translateX(-50%) scale(.8);
+  white-space: nowrap; opacity: 0;
+  font: 400 clamp(1.7rem, 8vw, 2.3rem) "Pinyon Script", cursive;
+  color: var(--gold-hi); text-shadow: 0 0 14px rgba(var(--gold-rgb), .7);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.walkers.married .just { opacity: 1; transform: translateX(-50%) scale(1); }
+
+footer.block { padding-bottom: calc(var(--fw) * 2 + 5.5rem); }
+.heartfly { position: fixed; z-index: 7; pointer-events: none; font-size: 18px; line-height: 1; opacity: 0; }
+
+/* Your own groom.png / bride.png pictures */
+img.fig { object-fit: contain; object-position: 50% 100%; max-height: calc(var(--fw) * 2.3); }
